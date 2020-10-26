@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name="users")
+@Entity(name = "users")
 public class User {
 
     @Id
