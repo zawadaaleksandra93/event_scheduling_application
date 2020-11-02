@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>mainPage</title>
+
+    <th:block th:fragment="styles">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+              crossorigin="anonymous">
+
+    </th:block>
+</head>
+
+<body>
+<div th:fragment="navigator">
+
+    <nav class="site-header sticky-top py-1">
+
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+
+            <a class="py-2" href="#" aria-label="Product">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+                     viewBox="0 0 24 24" focusable="false"><title>Product</title>
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
+                </svg>
+
+            </a>
+
+            <a class="py-2 d-none d-md-inline-block" th:href="@{/}">Home</a>
+
+            <a class="py-2 d-none d-md-inline-block" th:href="@{/product/getProduct}">Create User</a>
+            <a class="py-2 d-none d-md-inline-block" th:href="@{/product/getProduct}">Login</a>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

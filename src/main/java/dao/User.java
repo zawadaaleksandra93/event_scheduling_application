@@ -1,16 +1,21 @@
 package dao;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.UserStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity(name = "users")
 public class User {
 
@@ -31,6 +36,11 @@ public class User {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Role role;
+    private UserStatus userStatus;
 
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 }
