@@ -38,9 +38,9 @@ public class User {
     @Column(name = "status")
     private UserStatus userStatus;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "user_to_role",
-    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "login"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name"))
-    private List<Role> roles = new ArrayList<>();
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 }

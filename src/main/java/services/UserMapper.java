@@ -3,6 +3,7 @@ package services;
 import dao.User;
 import lombok.RequiredArgsConstructor;
 import model.UserForm;
+import model.UserStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class UserMapper {
                 .email(userForm.getLogin())
                 .password(passwordEncoder.encode(userForm.getPassword()))
                 .nick(userForm.getNick())
-                .role(Role.REGULAR_USER)
+                .userStatus(UserStatus.ACTIVATED)
                 .build();
 
         return user;

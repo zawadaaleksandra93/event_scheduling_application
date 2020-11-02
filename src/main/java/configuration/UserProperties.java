@@ -1,5 +1,6 @@
 package configuration;
 
+import dao.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,6 @@ public class UserProperties {
     private String login;
     private String password;
     private String nick;
-    private UserStatus userRole;
+    private UserStatus userStatus;
+    private Role role;
 }
