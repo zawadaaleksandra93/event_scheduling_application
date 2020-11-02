@@ -43,4 +43,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    @OneToMany(mappedBy = "eventAdmin")
+    private List<Event> events;
 }
