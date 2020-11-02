@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/esa/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -27,12 +27,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/email")
+    @GetMapping("/{email}")
     public User getUserWithEmail(@PathVariable(name = "email") String email) throws Exception {
         return userService.findByEmail(email);
     }
 
-    @GetMapping("/email")
+    @GetMapping("/{nick}")
     public User getUserWithNick(@PathVariable(name = "nick") String nick) throws Exception {
         return userService.findByNick(nick);
     }
