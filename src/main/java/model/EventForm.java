@@ -21,7 +21,7 @@ public class EventForm {
     private String name;
 
     @NotNull
-    
+
     private LocalDate date;
 
     @NotNull
