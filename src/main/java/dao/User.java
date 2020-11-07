@@ -33,6 +33,8 @@ public class User {
     @Column(name = "name_to_reflect")
     private String nick;
 
+
+
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
