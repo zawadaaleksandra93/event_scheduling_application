@@ -33,6 +33,6 @@ public class DbInitializer {
                 passwordEncoder.encode(userProperties.getPassword()),
                 userProperties.getNick(),
                 userProperties.getUserStatus(),
-                userProperties.getRole()));
+                userProperties.getRole(), List.of()));
     }
 }

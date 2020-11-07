@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <th:block th:replace="fragments ::styles"/>
+
+</head>
+<body>
+<div th:replace="fragments :: navigator"/>
+<form class="container" th:action="@{/esa/users/create}" method="post" th:object="${newUser}">
+    <br>
+    <div class="row">
+        <label class="col-6" for="fLogin">Login:</label>
+        <input class="col-6 form-control" id="fLogin" type="email" th:field="*{login}">
+    </div>
+    <div class="row">
+        <label class="col-6" for="fPassword">Password:</label>
+        <input class="col-6 form-control" id="fPassword" type="text" th:field="*{password}">
+    </div>
+    <div class="row">
+        <label class="col-6" for="fConfirmPassword">Confirm Password:</label>
+        <input class="col-6 form-control" id="fConfirmPassword" type="text" th:field="*{ConfirmPassword}">
+    </div>
+    <div class="row">
+        <label class="col-6" for="fNick">Nick:</label>
+        <input class="col-6 form-control" id="fNick" type="text" th:field="*{nick}">
+    </div>
+    <br>
+
+    <input type="submit" value="add product to shop" class="btn btn-primary col-12 row"/>
+</form>
+</body>
+</html>

@@ -9,11 +9,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import services.EventService;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/esa/event")
 @RequiredArgsConstructor
 public class EventController {
