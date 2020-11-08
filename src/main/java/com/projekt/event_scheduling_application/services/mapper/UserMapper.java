@@ -1,5 +1,6 @@
 package com.projekt.event_scheduling_application.services.mapper;
 
+import com.projekt.event_scheduling_application.dao.Role;
 import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class UserMapper {
                 .password("Pass123")
                 //.password(passwordEncoder.encode(userForm.getPassword()))
                 .nick(userForm.getNick())
+                .role(Role.REGULAR_USER)
                 .userStatus(UserStatus.ACTIVATED)
                 .build();
 

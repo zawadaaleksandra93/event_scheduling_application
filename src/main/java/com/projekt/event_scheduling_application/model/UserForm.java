@@ -18,7 +18,7 @@ public class UserForm {
 
     @NotNull
     @Email
-    @UniqueElements
+  //  @UniqueElements
     private String login;
 
     @NotNull

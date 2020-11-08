@@ -1,8 +1,7 @@
-package com.projekt.event_scheduling_application.web;
+package com.projekt.event_scheduling_application.controllers.api;
 
 import com.projekt.event_scheduling_application.model.EventForm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
