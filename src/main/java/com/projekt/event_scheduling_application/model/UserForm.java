@@ -1,4 +1,4 @@
-package model;
+package com.projekt.event_scheduling_application.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

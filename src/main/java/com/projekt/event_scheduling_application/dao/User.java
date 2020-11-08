@@ -1,15 +1,14 @@
-package dao;
+package com.projekt.event_scheduling_application.dao;
 
+import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.UserStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -33,13 +32,10 @@ public class User {
     @Column(name = "name_to_reflect")
     private String nick;
 
-
-
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private UserStatus userStatus;
-
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -48,4 +44,6 @@ public class User {
 
     @OneToMany(mappedBy = "eventAdmin")
     private List<Event> events;
+
+
 }

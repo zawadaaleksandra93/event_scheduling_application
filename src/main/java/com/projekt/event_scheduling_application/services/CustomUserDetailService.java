@@ -1,4 +1,4 @@
-package services;
+package com.projekt.event_scheduling_application.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

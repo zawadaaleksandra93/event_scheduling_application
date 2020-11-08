@@ -1,4 +1,4 @@
-package dao;
+package com.projekt.event_scheduling_application.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @AllArgsConstructor

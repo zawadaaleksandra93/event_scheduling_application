@@ -1,4 +1,4 @@
-package configuration;
+package com.projekt.event_scheduling_application.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests() //*,**,?
-                .antMatchers("/h2/**")
-                .permitAll()
+                .antMatchers("/h2/**").permitAll()
+                .anyRequest().permitAll() //tymczasowe
                 .and()
                 .formLogin()
                 .and()
@@ -24,9 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .and()
-                .csrf().ignoringAntMatchers("/h2/**")
-                .and()
+                .csrf().disable()//ignoringAntMatchers("/h2/**")
+                //.and()
                 .headers().frameOptions().disable();
+
     }
 
 }

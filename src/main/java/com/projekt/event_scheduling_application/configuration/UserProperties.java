@@ -1,12 +1,14 @@
-package configuration;
+package com.projekt.event_scheduling_application.configuration;
 
-import dao.Role;
+
+import com.projekt.event_scheduling_application.dao.Role;
+import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.UserStatus;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
 
 @Data
 @AllArgsConstructor

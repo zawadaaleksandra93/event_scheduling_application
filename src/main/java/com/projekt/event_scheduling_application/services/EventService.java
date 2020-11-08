@@ -1,12 +1,13 @@
-package services;
+package com.projekt.event_scheduling_application.services;
 
-import dao.Event;
+import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.model.EventForm;
 import lombok.RequiredArgsConstructor;
-import model.EventForm;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositories.EventRepository;
-import services.mapper.EventMapper;
+import com.projekt.event_scheduling_application.repositories.EventRepository;
+import com.projekt.event_scheduling_application.services.mapper.EventMapper;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ import java.util.List;
 @Transactional
 @Service
 public class EventService {
-    private EventRepository eventRepository;
-    private EventMapper eventMapper;
+    private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
 
     public List<Event> getAllEvents(){
         return eventRepository.findAll();
@@ -25,7 +26,7 @@ public class EventService {
         eventRepository.save(event);
     }
     public Event findByName(final String name){
-        return (Event) eventRepository.findById(name)
+        return eventRepository.findById(name)
                 .orElseThrow();
     }
 }

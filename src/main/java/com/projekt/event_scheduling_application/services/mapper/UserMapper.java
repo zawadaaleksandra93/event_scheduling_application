@@ -1,9 +1,9 @@
-package services.mapper;
+package com.projekt.event_scheduling_application.services.mapper;
 
-import dao.User;
+import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.RequiredArgsConstructor;
-import model.UserForm;
-import model.UserStatus;
+import com.projekt.event_scheduling_application.model.UserForm;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 
 public class UserMapper {
-    private final PasswordEncoder passwordEncoder;
+  //  private final PasswordEncoder passwordEncoder;
 
     public User fromUserFormToUser(final UserForm userForm) {
 
         final User user = User.builder()
                 .email(userForm.getLogin())
-                .password(passwordEncoder.encode(userForm.getPassword()))
+                .password("Pass123")
+                //.password(passwordEncoder.encode(userForm.getPassword()))
                 .nick(userForm.getNick())
                 .userStatus(UserStatus.ACTIVATED)
                 .build();

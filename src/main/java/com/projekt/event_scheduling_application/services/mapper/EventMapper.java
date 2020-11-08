@@ -1,10 +1,10 @@
-package services.mapper;
+package com.projekt.event_scheduling_application.services.mapper;
 
-import dao.Event;
-
-import dao.User;
+import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.model.EventForm;
 import lombok.RequiredArgsConstructor;
-import model.EventForm;
+
 import org.springframework.stereotype.Component;
 
 @Component
