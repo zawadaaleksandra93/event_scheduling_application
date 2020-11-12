@@ -13,10 +13,10 @@
 </div>
 
 <div>
-    <form th:action="@{/users/create}" method="post", th:object="${userForm}">
+    <form th:action="@{/esa/users/create}" method="post" th:object="${userForm}">
         <label for="email">Email: </label>
-        <input id="email" type="text" th:field="*{email}">
-        <p th:if="${#fields.hasErrors('email')}" th:text="${#fields.errors('email')}"></p>
+        <input id="email" type="text" th:field="*{login}">
+<!--        <p th:if="${#fields.hasErrors('email')}" th:text="${#fields.errors('email')}"></p>-->
 
         <label for="password">Password: </label>
         <input id="password" type="password" th:field="*{password}">
