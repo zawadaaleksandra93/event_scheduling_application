@@ -32,18 +32,22 @@ public class DbInitializer {
 
     @EventListener(ContextRefreshedEvent.class)
     public void onStartup() {
-        userRepository.save(new User("test@test.com",
+   userRepository.save(new User("test@test.com",
                 "Pass123",
                 "Stefan",
                 UserStatus.ACTIVATED,
                 Role.REGULAR_USER, List.of()));
-        /*
+
+
+/*
+
         userRepository.save(new User(userProperties.getLogin(),
                 passwordEncoder.encode(userProperties.getPassword()),
                 userProperties.getNick(),
                 userProperties.getUserStatus(),
                 userProperties.getRole(), List.of()));
 
-         */
+     */
+
     }
 }

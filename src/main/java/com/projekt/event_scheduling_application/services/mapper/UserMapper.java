@@ -18,7 +18,7 @@ public class UserMapper {
 
         final User user = User.builder()
                 .email(userForm.getLogin())
-                .password("Pass123")
+                .password(userForm.getPassword())
                 //.password(passwordEncoder.encode(userForm.getPassword()))
                 .nick(userForm.getNick())
                 .role(Role.REGULAR_USER)
