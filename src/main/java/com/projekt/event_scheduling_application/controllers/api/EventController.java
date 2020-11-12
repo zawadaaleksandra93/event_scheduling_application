@@ -1,32 +1,34 @@
 package com.projekt.event_scheduling_application.controllers.api;
 
+import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.model.EventForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.projekt.event_scheduling_application.services.EventService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/esa/event")
+@RequestMapping("api/esa/event")
 @RequiredArgsConstructor
 public class EventController {
 
     private final EventService eventService;
 
-    //  @Secured("ROLE_ADMIN")
-    @PostMapping("/create")
-    public String createNewEvent(@Valid @ModelAttribute(name = "eventForm") final EventForm eventForm, final Errors errors) {
-        if (errors.hasErrors()) {
-            return "event";
-        }
-        eventService.createEvent(eventForm);
-        return "redirect:/esa/event";
+
+    @GetMapping
+    public List<Event> showAllEvents() {
+        return eventService.getAllEvents();
     }
+
+    @GetMapping("/{name}")
+    public Event getUserWithEmail(@PathVariable(name = "name") String name) {
+        return eventService.findByName(name);
+    }
+
 
 
 }

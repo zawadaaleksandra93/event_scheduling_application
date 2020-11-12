@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Event</title>
+    <th:block th:replace="fragments ::styles"/>
+</head>
+<body>
+<h1>Users</h1>
+<div th:each="event : ${events}">
+    <p th:text="'Event name: ' + ${events.getName}"></p>
+    <p th:text="'Date: ' + ${events.getDate()}"></p>
+</div>
+<form th:action="@{/esa/event/create}" method="post" th:object="${eventForm}">
+    <label for="name">Name: </label>
+    <input id="name" type="text" th:field="*{name}">
+
+    <label for="date">Date: </label>
+    <input id="date" type="date" th:field="*{date}">
+
+    <label for="startTime">Start time: </label>
+    <input id="startTime" type="time" th:field="*{startTime}">
+
+    <label for="endTime">End time: </label>
+    <input id="endTime" type="time" th:field="*{endTime}">
+
+    <label for="description">description: </label>
+    <input id="description" type="text" th:field="*{description}">
+
+    <button type="submit">CREATE EVENT</button>
+</form>
+</div>
+
+</body>
+</html>

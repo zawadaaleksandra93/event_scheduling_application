@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projekt.event_scheduling_application.repositories.EventRepository;
 import com.projekt.event_scheduling_application.services.mapper.EventMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,5 +29,9 @@ public class EventService {
     public Event findByName(final String name){
         return eventRepository.findById(name)
                 .orElseThrow();
+    }
+
+    public Event findByDate(final LocalDate eventDate){
+        return null;
     }
 }
