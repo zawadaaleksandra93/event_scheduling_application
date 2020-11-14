@@ -19,8 +19,7 @@ public class EventForm {
     private String name;
 
     @NotNull
-
-    private LocalDate date;
+    private String date;
 
     @NotNull
     private LocalTime startTime;
@@ -29,6 +28,6 @@ public class EventForm {
     private LocalTime endTime;
 
     @NotNull
-    @Length(min = 20)
+    @Length(min = 2)
     private String description;
 }

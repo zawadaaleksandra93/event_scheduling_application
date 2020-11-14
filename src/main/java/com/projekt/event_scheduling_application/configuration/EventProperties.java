@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +24,5 @@ public class EventProperties {
     private LocalTime endTime;
     private String description;
     private User eventAdmin;
+    private List<User> listOfParticipants;
 }

@@ -43,7 +43,12 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "eventAdmin")
-    private List<Event> events;
+    private List<Event> createdEvents;
 
+    @ManyToMany
+    @JoinTable(name = "events_participants",
+            joinColumns = @JoinColumn(name = "user_email",referencedColumnName = "login"),
+    inverseJoinColumns = @JoinColumn(name = "event_id",referencedColumnName = "event_name"))
+    private List<Event> listOfSignedOnEvents;
 
 }
