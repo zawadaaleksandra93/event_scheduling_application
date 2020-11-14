@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,4 +42,10 @@ public class Event {
     @ManyToOne
     private User eventAdmin;
 
+    @ManyToMany (mappedBy = "events")
+    private List<User> listOfParticipants;
+
+
 }
+
+

@@ -43,7 +43,10 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "eventAdmin")
-    private List<Event> events;
+    @JoinColumn(name = "event_name")
+    private List<Event> createdEvents;
 
+    @ManyToMany
+    private List<Event> listOfSignedOnEvents;
 
 }

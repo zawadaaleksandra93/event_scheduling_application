@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EventMapper {
 
-    private User user;
+
 
     public Event fromEventFormToEvent(final EventForm eventForm){
 
@@ -21,7 +21,7 @@ public class EventMapper {
                 .startTime(eventForm.getStartTime())
                 .endTime(eventForm.getEndTime())
                 .description(eventForm.getDescription())
-                .eventAdmin(user)
+                .eventAdmin(null)
                 .build();
         return event;
     }
