@@ -22,8 +22,8 @@ public class EventService {
     public List<Event> getAllEvents(){
         return eventRepository.findAll();
     }
-    public void createEvent(final EventForm eventForm){
-        Event event = eventMapper.fromEventFormToEvent(eventForm);
+    public void createEvent(final EventForm eventForm, String userCreatingEvent){
+        Event event = eventMapper.fromEventFormToEvent(eventForm, userCreatingEvent);
         eventRepository.save(event);
     }
     public Event findByName(final String name){

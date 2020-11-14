@@ -7,6 +7,7 @@ import com.projekt.event_scheduling_application.model.UserForm;
 import com.projekt.event_scheduling_application.services.EventService;
 import com.projekt.event_scheduling_application.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RequestMapping("/esa/event")
 @Controller
@@ -33,11 +35,12 @@ public class EventWebController {
 
     @PostMapping("/create")
     public String createNewEvent(@Valid @ModelAttribute(name = "eventForm") final EventForm eventForm,
-                                 final Errors errors) {
+                                 final Errors errors, @AuthenticationPrincipal Principal principal) {
         if (errors.hasErrors()) {
             return "event";
         }
-        eventService.createEvent(eventForm);
+
+        eventService.createEvent(eventForm, principal.getName());
         return "redirect:/esa/event";
     }
 }

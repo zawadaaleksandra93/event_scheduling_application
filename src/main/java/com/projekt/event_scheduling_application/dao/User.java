@@ -42,8 +42,8 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(mappedBy = "eventAdmin")
-    @JoinColumn(name = "event_name")
+    @OneToMany()
+    @JoinColumn(name = "user_login")
     private List<Event> createdEvents;
 
     @ManyToMany

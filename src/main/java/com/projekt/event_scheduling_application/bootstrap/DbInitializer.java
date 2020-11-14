@@ -39,27 +39,27 @@ public class DbInitializer {
     private final EventProperties eventProperties;
 
 
-    User testUser = new User("test@test.com",
-            "Pass123",
-            "Stefan",
-            UserStatus.ACTIVATED,
-            Role.REGULAR_USER,
-            List.of(),
-            List.of());
-
-    Event testEvent = new Event("test event", LocalDate.of(2020, 12, 14),
-            LocalTime.of(9,00), LocalTime.of(11,00),"this is test event",
-            testUser,List.of());
-
     @EventListener(ContextRefreshedEvent.class)
     public void onStartup() {
-   userRepository.save(testUser);
+        User testUser = new User("test@test.com",
+                passwordEncoder.encode("Pass123"),
+                "Stefan",
+                UserStatus.ACTIVATED,
+                Role.REGULAR_USER,
+                List.of(),
+                List.of());
 
-   eventRepository.save(testEvent);
+        Event testEvent = new Event("test event", LocalDate.of(2020, 12, 14),
+                LocalTime.of(9, 00), LocalTime.of(11, 00), "this is test event",
+                testUser, List.of());
+
+        userRepository.save(testUser);
+
+        eventRepository.save(testEvent);
+
 
 
 /*
-
         userRepository.save(new User(userProperties.getLogin(),
                 passwordEncoder.encode(userProperties.getPassword()),
                 userProperties.getNick(),
@@ -68,8 +68,8 @@ public class DbInitializer {
                 userProperties.getListOfSignedOnEvents()
                 ,List.of()));
 
-     */
-/*
+
+
         eventRepository.save(new Event(eventProperties.getName(),
                 eventProperties.getEventDate(),
                 eventProperties.getStartTime(),
@@ -79,7 +79,6 @@ public class DbInitializer {
                 eventProperties.getListOfParticipants()));
 
  */
-
 
 
     }
