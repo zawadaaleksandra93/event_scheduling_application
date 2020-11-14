@@ -6,6 +6,7 @@
     <th:block th:replace="fragments ::styles"/>
 </head>
 <body>
+<div th:replace="fragments :: navigator"/>
 <h1>Users</h1>
 <div th:each="user : ${users}">
     <p th:text="'Email: ' + ${user.getEmail()}"></p>

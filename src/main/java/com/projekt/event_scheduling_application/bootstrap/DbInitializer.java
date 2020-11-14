@@ -41,26 +41,33 @@ public class DbInitializer {
 
     @EventListener(ContextRefreshedEvent.class)
     public void onStartup() {
-        User testUser = new User("test@test.com",
-                passwordEncoder.encode("Pass123"),
-                "Stefan",
+        Data data= new Data();
+        User testUser = new User(data.userName1,
+                passwordEncoder.encode(data.userPass1),
+                data.userNick1,
                 UserStatus.ACTIVATED,
                 Role.REGULAR_USER,
                 List.of(),
                 List.of());
-        User testUser2 = new User("test2@test.com",
-                passwordEncoder.encode("Pass456"),
-                "Tomasz",
+        User testUser2 = new User(data.userName2,
+                passwordEncoder.encode(data.userPass2),
+                data.userNick2,
                 UserStatus.ACTIVATED,
                 Role.ADMIN,
                 List.of(),
                 List.of());
 
-        Event testEvent = new Event("test event", LocalDate.of(2020, 12, 14),
-                LocalTime.of(9, 00), LocalTime.of(11, 00), "this is test event",
+        Event testEvent = new Event(data.eventName1,
+                data.eventDay1,
+                data.eventStart1,
+                data.eventEnd1,
+                data.eventDescription1,
                 testUser2, List.of());
-        Event testEvent2 = new Event("second event", LocalDate.of(2021, 4, 2),
-                LocalTime.of(14, 00), LocalTime.of(15, 30), "this is second event",
+        Event testEvent2 = new Event(data.eventName2,
+                data.eventDay2,
+                data.eventStart2,
+                data.eventEnd2,
+                data.eventDescription2,
                 testUser2, List.of());
 
         userRepository.save(testUser);

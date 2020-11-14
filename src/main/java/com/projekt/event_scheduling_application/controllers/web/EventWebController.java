@@ -28,6 +28,12 @@ public class EventWebController {
     private final EventController eventController;
 
     @GetMapping
+    public String getWelcomeForm(){
+        return "welcome";
+
+    }
+
+    @GetMapping("/event_form")
     public String getEventForm(ModelMap modelMap) {
         modelMap.addAttribute("eventForm", new EventForm());
         return "event";
@@ -45,6 +51,7 @@ public class EventWebController {
     }
 
     @GetMapping("/getAllEvents")
+
     public String getAllEvents(Model model) {
         List<Event> allEvents = eventController.showAllEvents();
         model.addAttribute("allEvents", allEvents);
@@ -53,12 +60,13 @@ public class EventWebController {
 
     }
 
-    @PostMapping("/assign")
-    public String assignForEvent(@Valid @ModelAttribute(name = "allEvents") final Event event,
+    @GetMapping("/assign/{name}")
+    public String assignForEvent(@Valid @ModelAttribute(name = "allEvents") @PathVariable final String name,
                                  final Errors errors, @AuthenticationPrincipal Principal principal) {
         if (errors.hasErrors()) {
             return "all_events";
         }
+        Event event=eventService.findByName(name);
         eventService.assignForEvent(event, principal.getName());
         return "redirect:/esa/event";
     }
@@ -71,7 +79,6 @@ public class EventWebController {
         return "event_view";
 
     }
-
 
 
 }
