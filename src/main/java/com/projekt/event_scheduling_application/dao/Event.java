@@ -40,11 +40,10 @@ public class Event {
     private String description;
 
     @ManyToOne
-
+    @JoinColumn(name = "user_login")
     private User eventAdmin;
 
     @ManyToMany (mappedBy = "listOfSignedOnEvents")
-
     private List<User> listOfParticipants;
 
 

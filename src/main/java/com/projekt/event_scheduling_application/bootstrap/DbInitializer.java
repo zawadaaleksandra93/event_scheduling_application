@@ -48,14 +48,26 @@ public class DbInitializer {
                 Role.REGULAR_USER,
                 List.of(),
                 List.of());
+        User testUser2 = new User("test2@test.com",
+                passwordEncoder.encode("Pass456"),
+                "Tomasz",
+                UserStatus.ACTIVATED,
+                Role.ADMIN,
+                List.of(),
+                List.of());
 
         Event testEvent = new Event("test event", LocalDate.of(2020, 12, 14),
                 LocalTime.of(9, 00), LocalTime.of(11, 00), "this is test event",
-                testUser, List.of());
+                testUser2, List.of());
+        Event testEvent2 = new Event("second event", LocalDate.of(2021, 4, 2),
+                LocalTime.of(14, 00), LocalTime.of(15, 30), "this is second event",
+                testUser2, List.of());
 
         userRepository.save(testUser);
+        userRepository.save(testUser2);
 
         eventRepository.save(testEvent);
+        eventRepository.save(testEvent2);
 
 
 

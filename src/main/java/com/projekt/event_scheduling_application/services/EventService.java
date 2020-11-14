@@ -1,7 +1,10 @@
 package com.projekt.event_scheduling_application.services;
 
 import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.model.EventForm;
+import com.projekt.event_scheduling_application.repositories.UserRepository;
+import com.projekt.event_scheduling_application.services.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import java.util.List;
 public class EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
+    private final UserRepository userRepository;
 
     public List<Event> getAllEvents(){
         return eventRepository.findAll();
@@ -33,5 +37,13 @@ public class EventService {
 
     public Event findByDate(final LocalDate eventDate){
         return null;
+    }
+
+    public void assignForEvent(Event event, String userToBeAssigned){
+
+        User userToAssign = userRepository.findById(userToBeAssigned).orElseThrow();
+
+        event.getListOfParticipants().add(userToAssign);
+
     }
 }
