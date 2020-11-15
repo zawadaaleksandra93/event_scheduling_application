@@ -61,13 +61,12 @@ public class EventWebController {
     }
 
     @GetMapping("/assign/{name}")
-    public String assignForEvent(@Valid @ModelAttribute(name = "allEvents") @PathVariable final String name,
-                                 final Errors errors, @AuthenticationPrincipal Principal principal) {
-        if (errors.hasErrors()) {
-            return "all_events";
-        }
+    public String assignForEvent(@PathVariable final String name,
+                                  @AuthenticationPrincipal Principal principal) {
+
         Event event=eventService.findByName(name);
         eventService.assignForEvent(event, principal.getName());
+        //wyslac maila z potwierdzeniem do uzytkownika
         return "redirect:/esa/event";
     }
 
@@ -77,7 +76,6 @@ public class EventWebController {
         model.addAttribute("allEvents", eventWithGivenName);
 
         return "event_view";
-
     }
 
 

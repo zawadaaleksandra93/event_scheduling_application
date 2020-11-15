@@ -48,11 +48,12 @@ public class EventService {
         User userToAssign = userRepository.findByNick(userToBeAssigned).orElseThrow();
 
         List<User> participantsList = event.getListOfParticipants();
-        if (participantsList.contains(userToAssign)){
+        if (participantsList.contains(userToAssign)) {
             new UserAlreadyAddedException();
         }
         participantsList.add(userToAssign);
-
+        userToAssign.getListOfSignedOnEvents().add(event);
+        userRepository.save(userToAssign);
     }
 
 }

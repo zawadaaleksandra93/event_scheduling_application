@@ -12,22 +12,22 @@ import java.time.LocalTime;
 import java.util.List;
 @Getter
 public class Data {
-    String userName1 = "test@test.com";
-    String userName2 = "test2@test.com";
-    String userPass1 = "Pass123";
-    String userPass2 = "Pass456";
-    String userNick1 = "Stefan";
-    String userNick2 = "Tomasz";
+    String USER_NAME1 = "test@test.com";
+    String USER_NAME2 = "test2@test.com";
+    String USER_PASS1 = "Pass123";
+    String USER_PASS2 = "Pass456";
+    String USER_NICK1 = "Stefan";
+    String USER_NICK2 = "Tomasz";
 
-    String eventName1 = "first event1";
-    String eventName2 = "second event";
-    LocalDate eventDay1 = LocalDate.of(2020,12,14);
-    LocalDate eventDay2 = LocalDate.of(2021,4,6);
-    LocalTime eventStart1 = LocalTime.of(12,00);
-    LocalTime eventStart2 = LocalTime.of(14,00);
-    LocalTime eventEnd1 = LocalTime.of(13,30);
-    LocalTime eventEnd2 = LocalTime.of(15,30);
-    String eventDescription1 = "this is first test event";
-    String eventDescription2 = "this is second test event";
+    String EVENT_NAME1 = "first event1";
+    String EVENT_NAME2 = "second event";
+    LocalDate EVENT_DAY1 = LocalDate.of(2020,12,14);
+    LocalDate EVENT_DAY2 = LocalDate.of(2021,4,6);
+    LocalTime EVENT_START1 = LocalTime.of(12,00);
+    LocalTime EVENT_START2 = LocalTime.of(14,00);
+    LocalTime EVENT_END1 = LocalTime.of(13,30);
+    LocalTime EVENT_END2 = LocalTime.of(15,30);
+    String EVENT_DESCRIPTION1 = "this is first test event";
+    String EVENT_DESCRIPTION2 = "this is second test event";
 
 }

@@ -17,9 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -42,32 +39,32 @@ public class DbInitializer {
     @EventListener(ContextRefreshedEvent.class)
     public void onStartup() {
         Data data= new Data();
-        User testUser = new User(data.userName1,
-                passwordEncoder.encode(data.userPass1),
-                data.userNick1,
+        User testUser = new User(data.USER_NAME1,
+                passwordEncoder.encode(data.USER_PASS1),
+                data.USER_NICK1,
                 UserStatus.ACTIVATED,
                 Role.REGULAR_USER,
                 List.of(),
                 List.of());
-        User testUser2 = new User(data.userName2,
-                passwordEncoder.encode(data.userPass2),
-                data.userNick2,
+        User testUser2 = new User(data.USER_NAME2,
+                passwordEncoder.encode(data.USER_PASS2),
+                data.USER_NICK2,
                 UserStatus.ACTIVATED,
                 Role.ADMIN,
                 List.of(),
                 List.of());
 
-        Event testEvent = new Event(data.eventName1,
-                data.eventDay1,
-                data.eventStart1,
-                data.eventEnd1,
-                data.eventDescription1,
+        Event testEvent = new Event(data.EVENT_NAME1,
+                data.EVENT_DAY1,
+                data.EVENT_START1,
+                data.EVENT_END1,
+                data.EVENT_DESCRIPTION1,
                 testUser2, List.of());
-        Event testEvent2 = new Event(data.eventName2,
-                data.eventDay2,
-                data.eventStart2,
-                data.eventEnd2,
-                data.eventDescription2,
+        Event testEvent2 = new Event(data.EVENT_NAME2,
+                data.EVENT_DAY2,
+                data.EVENT_START2,
+                data.EVENT_END2,
+                data.EVENT_DESCRIPTION2,
                 testUser2, List.of());
 
         userRepository.save(testUser);
