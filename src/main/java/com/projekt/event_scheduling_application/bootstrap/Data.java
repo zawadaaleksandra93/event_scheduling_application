@@ -13,11 +13,16 @@ import java.util.List;
 @Getter
 public class Data {
     String USER_NAME1 = "test@test.com";
-    String USER_NAME2 = "test2@test.com";
+    String USER_NAME2 = "esamanager2@gmail.com"; //pass: !!Esa123
+    String USER_NAME3 = "test3@test.com";
     String USER_PASS1 = "Pass123";
     String USER_PASS2 = "Pass456";
+    String USER_PASS3 = "Pass789";
     String USER_NICK1 = "Stefan";
     String USER_NICK2 = "Tomasz";
+    String USER_NICK3 = "Marek";
+
+    String TEAM_NAME = "team1";
 
     String EVENT_NAME1 = "first event1";
     String EVENT_NAME2 = "second event";

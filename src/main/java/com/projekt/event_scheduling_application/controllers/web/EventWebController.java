@@ -3,11 +3,15 @@ package com.projekt.event_scheduling_application.controllers.web;
 import com.projekt.event_scheduling_application.controllers.api.EventController;
 import com.projekt.event_scheduling_application.controllers.api.UserController;
 import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.dao.Team;
+import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.mailConfirmation.ApprovalRequestMail;
 import com.projekt.event_scheduling_application.model.EventForm;
 import com.projekt.event_scheduling_application.model.UserForm;
 import com.projekt.event_scheduling_application.services.EventService;
 import com.projekt.event_scheduling_application.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +30,10 @@ public class EventWebController {
 
     private final EventService eventService;
     private final EventController eventController;
+    private final UserService userService;
 
     @GetMapping
-    public String getWelcomeForm(){
+    public String getWelcomeForm() {
         return "welcome";
 
     }
@@ -60,13 +65,25 @@ public class EventWebController {
 
     }
 
-    @GetMapping("/assign/{name}")
+  /*  @GetMapping("/assign/{name}")
     public String assignForEvent(@PathVariable final String name,
                                   @AuthenticationPrincipal Principal principal) {
+
 
         Event event=eventService.findByName(name);
         eventService.assignForEvent(event, principal.getName());
         //wyslac maila z potwierdzeniem do uzytkownika
+        return "redirect:/esa/event";
+    }
+
+   */
+
+    @GetMapping("/assign/{name}")
+    public String sendRequestToManager(@PathVariable final String name,
+                                       @AuthenticationPrincipal Principal principal) {
+        Event event = eventService.findByName(name);
+       // User user = userService.findByEmail(principal.getName());
+        eventService.sendRequestToAssignToManager(event, principal.getName());
         return "redirect:/esa/event";
     }
 
