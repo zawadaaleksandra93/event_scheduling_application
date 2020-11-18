@@ -21,7 +21,7 @@ public class ApprovalRequestMail implements MessageCreator {
 
         SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom("noreply@esa.com");
+        message.setFrom("esanoreply1@gmail.com");
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);

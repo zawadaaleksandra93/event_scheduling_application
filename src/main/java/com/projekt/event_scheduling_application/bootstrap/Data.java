@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.List;
 @Getter
 public class Data {
-    String USER_NAME1 = "test@test.com";
+    String USER_NAME1 = "zalex93@gmail.com";
     String USER_NAME2 = "esamanager2@gmail.com"; //pass: !!Esa123
     String USER_NAME3 = "test3@test.com";
     String USER_PASS1 = "Pass123";

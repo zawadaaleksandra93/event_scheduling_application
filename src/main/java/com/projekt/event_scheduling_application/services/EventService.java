@@ -64,28 +64,33 @@ public class EventService {
         userRepository.save(userToAssign);
     }
 
-    public User findTeamManager(User user) {
+    public User findTeamManager(String userToBeAssigned) {
+        final User user = userRepository.findById(userToBeAssigned).orElseThrow();
         User teamManager = user.getTeam().stream()
-                .filter(team -> team.getTeamMembers().stream()
-                        .filter(teamMember -> teamMember.getEmail().equals(user.getEmail()))
-                        .filter(teamMember -> teamMember.getTeamRole().equals(TeamRole.REGULAR))
-                        .)
-                .collect(Collectors.toList());
-
-
-
-
+                .filter(team -> !team.getTeamLeader().equals(user))
+                .map(team -> team.getTeamLeader())
+                .findFirst().orElseThrow();
         return teamManager;
     }
 
-    public void sendRequestToAssignToManager(Event event, String userToBeAssigned) {
+    public void sendRequestToAssignToManager(String eventName, String userToBeAssigned) {
+        final User teamManager = findTeamManager(userToBeAssigned);
+        String approvalSubject = "ESA: Manager approval required";
+        String approvalMessage = String
+                .format("please accept participation of %s in an event: %s. Please go to path: to accept request"
+                        ,userToBeAssigned, eventName);
+        approvalRequestMail.sendEmail(teamManager.getEmail()
+                ,approvalSubject, approvalMessage);
+    }
 
-
-        final User user = userRepository.findById(userToBeAssigned).orElseThrow();
-        final User teamManager = findTeamManager(user);
-
-
-        approvalRequestMail.sendEmail(teamManager.getEmail(), emailConst.getAPPROVAL_SUBJECT(), emailConst.getAPPROVAL_MESSAGE());
+    public void sendInformationThatRequestHadBeenSend(String eventName, String userToBeAssigned) {
+        final User teamManager = findTeamManager(userToBeAssigned);
+        String teamManagerName = teamManager.getEmail();
+        String messageSubject = String.format("ESA: managers approval required for %s", eventName);
+        String messageContent = String
+                .format("Request of participation in %s has been send to %s"
+                        ,eventName,teamManagerName);
+        approvalRequestMail.sendEmail(userToBeAssigned,messageSubject,messageContent);
     }
 
 }

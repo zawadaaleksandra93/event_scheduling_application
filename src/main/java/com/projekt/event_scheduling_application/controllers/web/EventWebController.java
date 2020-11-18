@@ -65,7 +65,19 @@ public class EventWebController {
 
     }
 
-  /*  @GetMapping("/assign/{name}")
+    @GetMapping("/assign/{name}")
+    public String sendRequestToManager(@PathVariable final String name,
+                                       @AuthenticationPrincipal Principal principal) {
+        Event event = eventService.findByName(name);
+        String eventName = event.getName();
+        User user = userService.findByEmail(principal.getName());
+        String userEmail = user.getEmail();
+        eventService.sendRequestToAssignToManager(eventName, userEmail);
+        eventService.sendInformationThatRequestHadBeenSend(eventName, userEmail);
+        return "redirect:/esa/event";
+    }
+
+      /*  @GetMapping("/assign/{name}/request")
     public String assignForEvent(@PathVariable final String name,
                                   @AuthenticationPrincipal Principal principal) {
 
@@ -78,14 +90,6 @@ public class EventWebController {
 
    */
 
-    @GetMapping("/assign/{name}")
-    public String sendRequestToManager(@PathVariable final String name,
-                                       @AuthenticationPrincipal Principal principal) {
-        Event event = eventService.findByName(name);
-       // User user = userService.findByEmail(principal.getName());
-        eventService.sendRequestToAssignToManager(event, principal.getName());
-        return "redirect:/esa/event";
-    }
 
     @GetMapping("/{name}")
     public String getEventDetailsByName(@PathVariable String name, Model model) {
