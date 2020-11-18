@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+    <th:block th:replace="fragments ::styles"/>
+</head>
+<body>
+<div th:replace="fragments :: navigator"/>
+<h1>Approval</h1>
+<div th:each="user: ${user}">
+<form th:action="@{esa/event/assign/{name}/approval (name=${user.email})}" method="post" th:object="${approval}">
+    <label>Approve:</label>
+    <input type="checkbox" th:field="${approval}"/>
+    <input type="submit" value="Submit">
+</form>
+</div>
+
+<!-- <div>
+    <form th:action="@{esa/event/assign/{name}/approval}" method="post" th:object="${approvalForm}">
+        <label for="approve">Approve: </label>
+        <input id="approve" type="text" th:field="*{approve}">
+    </form>
+
+
+<div class="row">
+    <label class="col-6" for="fApprove">Approve: </label>
+    <select class="col-6 form-control" id="fApprove" type="" th:field="*{approve}">
+        <option value="True">True</option>
+        <option value="False">False</option>
+    </select>
+</div>
+    -->
+</body>
+</html>
