@@ -1,9 +1,6 @@
 package com.projekt.event_scheduling_application.dao;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -39,10 +36,13 @@ public class Event {
     @Column(name = "description")
     private String description;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "user_login")
     private User eventAdmin;
 
+    @ToString.Exclude
     @ManyToMany (mappedBy = "listOfSignedOnEvents")
     private List<User> listOfParticipants;
 

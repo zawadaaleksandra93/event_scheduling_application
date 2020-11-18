@@ -6,7 +6,8 @@
     <th:block th:replace="fragments ::styles"/>
 </head>
 <body>
-<h1>Users</h1>
+<div th:replace="fragments :: navigator"/>
+<h1>Create User</h1>
 <div th:each="user : ${users}">
     <p th:text="'Email: ' + ${user.getEmail()}"></p>
     <p th:text="'Email: ' + ${user.getStatus()}"></p>

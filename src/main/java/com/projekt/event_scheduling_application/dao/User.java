@@ -42,6 +42,14 @@ public class User {
     @Column(name = "role")
     private Role role;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "team_role")
+    private TeamRole teamRole;
+
+    @OneToMany(mappedBy = "teamLeader")
+    private List<Team> managedTeam;
+
     @OneToMany(mappedBy = "eventAdmin")
     private List<Event> createdEvents;
 
@@ -50,5 +58,11 @@ public class User {
             joinColumns = @JoinColumn(name = "user_email",referencedColumnName = "login"),
     inverseJoinColumns = @JoinColumn(name = "event_id",referencedColumnName = "event_name"))
     private List<Event> listOfSignedOnEvents;
+
+    @ManyToMany
+    @JoinTable(name = "Team_members",
+            joinColumns = @JoinColumn(name = "user_email",referencedColumnName = "login"),
+            inverseJoinColumns = @JoinColumn(name = "team",referencedColumnName = "team"))
+    private List<Team> team;
 
 }
