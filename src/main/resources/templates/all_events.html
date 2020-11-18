@@ -19,15 +19,6 @@
 <div class="row rowelement" th:each="event:${allEvents}">
     <div class="col-3" th:text="${event.name}"></div>
     <a class="col-3" th:href="@{/esa/event/{name} (name=${event.name})}">details</a>
-<!--    <a class="col-2" th:href="@{/esa/event/assign/{name} (name=${event.name})}">Assign</a>
-
-    <div class="col-2" th:text="${event.date}"></div>
-     <div class="col-2" th:text="${event.startTime}"></div>
-     <div class="col-2" th:text="${event.endTime}"></div>
-     <div class="col-2" th:text="${event.description}"></div>
-     <a class="col-2" th:href="@{/esa/event/assign/{name} (name=${event.name})}">Assign</a>
-              <button type="submit">Assign</button> -->
-
    </div>
 
    </body>

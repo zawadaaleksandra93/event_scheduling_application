@@ -6,6 +6,7 @@ import com.projekt.event_scheduling_application.dao.Event;
 import com.projekt.event_scheduling_application.dao.Team;
 import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.mailConfirmation.ApprovalRequestMail;
+import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
 import com.projekt.event_scheduling_application.model.UserForm;
 import com.projekt.event_scheduling_application.services.EventService;
@@ -23,7 +24,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
-@RequestMapping("/esa/event")
+@RequestMapping("/esa/event/")
 @Controller
 @RequiredArgsConstructor
 public class EventWebController {
@@ -74,21 +75,27 @@ public class EventWebController {
         String userEmail = user.getEmail();
         eventService.sendRequestToAssignToManager(eventName, userEmail);
         eventService.sendInformationThatRequestHadBeenSend(eventName, userEmail);
-        return "redirect:/esa/event";
+        return "request_had_been_send";
     }
 
-      /*  @GetMapping("/assign/{name}/request")
+    @GetMapping("/approval")
+    public String getApprovalForm(ModelMap modelMap) {
+        modelMap.addAttribute("approval", new ApprovalForm());
+        return "approval_form";
+    }
+
+    @PostMapping("/assign/{name}/approval")
     public String assignForEvent(@PathVariable final String name,
-                                  @AuthenticationPrincipal Principal principal) {
+                                 @Valid @ModelAttribute(name = "approval")
+                                 final ApprovalForm approvalForm,
+                                 @AuthenticationPrincipal Principal principal) {
 
+        Event event = eventService.findByName(name);
+        eventService.managersApproval(approvalForm,event,principal.getName());
+        //eventService.assignForEvent(event, principal.getName());
 
-        Event event=eventService.findByName(name);
-        eventService.assignForEvent(event, principal.getName());
-        //wyslac maila z potwierdzeniem do uzytkownika
         return "redirect:/esa/event";
     }
-
-   */
 
 
     @GetMapping("/{name}")
