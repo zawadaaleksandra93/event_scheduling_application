@@ -59,6 +59,7 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "event_id",referencedColumnName = "event_name"))
     private List<Event> listOfSignedOnEvents;
 
+    @NotNull
     @ManyToMany
     @JoinTable(name = "Team_members",
             joinColumns = @JoinColumn(name = "user_email",referencedColumnName = "login"),

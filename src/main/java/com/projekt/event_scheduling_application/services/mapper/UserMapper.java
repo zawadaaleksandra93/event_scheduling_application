@@ -12,17 +12,19 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 
 public class UserMapper {
-  //  private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public User fromUserFormToUser(final UserForm userForm) {
 
         final User user = User.builder()
                 .email(userForm.getLogin())
-                .password(userForm.getPassword())
-                //.password(passwordEncoder.encode(userForm.getPassword()))
+                //.password(userForm.getPassword())
+                .password(passwordEncoder.encode(userForm.getPassword()))
                 .nick(userForm.getNick())
                 .role(Role.REGULAR_USER)
                 .userStatus(UserStatus.ACTIVATED)
+                .teamRole(userForm.getTeamRole())
+                .team(userForm.getTeam())
                 .build();
 
         return user;

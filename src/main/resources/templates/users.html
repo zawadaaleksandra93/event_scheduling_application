@@ -28,6 +28,17 @@
         <label for="nick">Nick: </label>
         <input id="nick" type="text" th:field="*{nick}">
 
+        <label for="team_role">Team Role: </label>
+        <select id="team_role" type="" th:field="*{teamRole}">
+            <option value="REGULAR">REGULAR</option>
+            <option value="MANAGER">MANAGER</option>
+        </select>
+
+        <label for="team">Team: </label>
+        <select id="team" type="" th:field="*{team}">
+            <option value="team1">team1</option>
+        </select>
+
         <button type="submit">CREATE USER</button>
     </form>
 </div>

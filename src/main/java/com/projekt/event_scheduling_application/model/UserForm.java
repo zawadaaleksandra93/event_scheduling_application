@@ -1,5 +1,7 @@
 package com.projekt.event_scheduling_application.model;
 
+import com.projekt.event_scheduling_application.dao.Team;
+import com.projekt.event_scheduling_application.dao.TeamRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,7 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -32,6 +35,12 @@ public class UserForm {
     @NotBlank
     @Length(max = 50)
     private String nick;
+
+    @NotNull
+    private TeamRole teamRole;
+
+    @NotNull
+    private List<Team> team;
 
 
     @AssertTrue
