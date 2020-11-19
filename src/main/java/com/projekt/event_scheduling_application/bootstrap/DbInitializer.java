@@ -44,7 +44,7 @@ public class DbInitializer {
         Data data= new Data();
 
         Team team1 = new Team(data.TEAM_NAME,null,List.of());
-        Team team2 = new Team(data.TEAM_NAME,null,List.of());
+        Team team2 = new Team(data.TEAM_NAME2,null,List.of());
         User testUser = new User(data.USER_NAME1,
                 passwordEncoder.encode(data.USER_PASS1),
                 data.USER_NICK1,
