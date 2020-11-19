@@ -8,15 +8,19 @@
 <body>
 <div th:replace="fragments :: navigator"/>
 <h1>Approval</h1>
-<div th:each="user: ${user}" th:each="event: ${event}">
-<form th:action="@{esa/event/assign/{name}/{eventName}/approval (name=${user.email})(eventName =${event.name})}" method="post" th:object="${approval}">
+
+<div th:each="user: ${users}" >
+    <div th:each="event: ${events}">
+<form method="post" th:object="${approval}"
+      th:action="@{/esa/event/assign/{name}/{eventName}/approval/t-f (name=${user.email},eventName =${event.name})}">
     <label>Approve:</label>
     <input type="checkbox" th:field="${approval}"/>
     <input type="submit" value="Submit">
 </form>
 </div>
-
-<!-- <div>
+</div>
+<!--
+ <div>
     <form th:action="@{esa/event/assign/{name}/approval}" method="post" th:object="${approvalForm}">
         <label for="approve">Approve: </label>
         <input id="approve" type="text" th:field="*{approve}">
