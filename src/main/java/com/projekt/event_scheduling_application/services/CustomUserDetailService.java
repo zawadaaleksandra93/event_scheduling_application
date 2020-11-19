@@ -17,6 +17,4 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         return new UserAdapter(userService.findByEmail(email));
     }
-    //mapping user->user details (adapter)
-
 }
