@@ -23,6 +23,7 @@ public class Data {
     String USER_NICK3 = "Marek";
 
     String TEAM_NAME = "team1";
+    String TEAM_NAME2 = "team2";
 
     String EVENT_NAME1 = "first_event1";
     String EVENT_NAME2 = "second_event";
