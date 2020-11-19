@@ -24,7 +24,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
-@RequestMapping("/esa/event/")
+@RequestMapping("/esa/event")
 @Controller
 @RequiredArgsConstructor
 public class EventWebController {
@@ -84,14 +84,16 @@ public class EventWebController {
         return "approval_form";
     }
 
-    @PostMapping("/assign/{name}/approval")
+    @PostMapping("/assign/{name}/{eventName}/approval")
     public String assignForEvent(@PathVariable final String name,
+                                 @PathVariable final String eventName,
                                  @Valid @ModelAttribute(name = "approval")
-                                 final ApprovalForm approvalForm,
-                                 @AuthenticationPrincipal Principal principal) {
+                                 final ApprovalForm approvalForm
+                                // ,@AuthenticationPrincipal Principal principal
+                                 ) {
 
-        Event event = eventService.findByName(name);
-        eventService.managersApproval(approvalForm,event,principal.getName());
+        Event event = eventService.findByName(eventName);
+        eventService.managersApproval(approvalForm,event,name);
         //eventService.assignForEvent(event, principal.getName());
 
         return "redirect:/esa/event";
