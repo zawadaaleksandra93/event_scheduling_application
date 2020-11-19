@@ -78,9 +78,9 @@ public class EventService {
         String approvalSubject = "ESA: Manager approval required";
         String approvalMessage = String
                 .format("please accept participation of %s in an event: %s. /n" +
-                                "Please go to path: http://localhost:8080/esa/event/assign/%s/approval " +
+                                "Please go to path: http://localhost:8080/esa/event/assign/%s/%s/approval " +
                                 "to accept request"
-                        , userToBeAssigned, eventName, userToBeAssigned);
+                        , userToBeAssigned, eventName, userToBeAssigned, eventName);
         approvalRequestMail.sendEmail(teamManager.getEmail()
                 , approvalSubject, approvalMessage);
     }

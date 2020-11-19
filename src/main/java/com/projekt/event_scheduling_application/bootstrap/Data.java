@@ -24,8 +24,8 @@ public class Data {
 
     String TEAM_NAME = "team1";
 
-    String EVENT_NAME1 = "first event1";
-    String EVENT_NAME2 = "second event";
+    String EVENT_NAME1 = "first_event1";
+    String EVENT_NAME2 = "second_event";
     LocalDate EVENT_DAY1 = LocalDate.of(2020,12,14);
     LocalDate EVENT_DAY2 = LocalDate.of(2021,4,6);
     LocalTime EVENT_START1 = LocalTime.of(12,00);
