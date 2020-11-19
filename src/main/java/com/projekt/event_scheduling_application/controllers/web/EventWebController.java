@@ -78,22 +78,29 @@ public class EventWebController {
         return "request_had_been_send";
     }
 
-    @GetMapping("/approval")
-    public String getApprovalForm(ModelMap modelMap) {
+    @GetMapping("/assign/{name}/{eventName}/approval")
+    public String getApprovalForm(ModelMap modelMap,
+                                  @PathVariable final String name,
+                                  @PathVariable final String eventName) {
+        List<User> users = userService.getAllUsers();
+        List<Event> events = eventService.getAllEvents();
+        events.stream().map(e->e.getName());
         modelMap.addAttribute("approval", new ApprovalForm());
+        modelMap.addAttribute("users", users);
+        modelMap.addAttribute("events",events);
         return "approval_form";
     }
 
-    @PostMapping("/assign/{name}/{eventName}/approval")
+    @PostMapping("/assign/{name}/{eventName}/approval/t-f")
     public String assignForEvent(@PathVariable final String name,
                                  @PathVariable final String eventName,
                                  @Valid @ModelAttribute(name = "approval")
-                                 final ApprovalForm approvalForm
-                                // ,@AuthenticationPrincipal Principal principal
-                                 ) {
+                                     final ApprovalForm approvalForm
+                                 // ,@AuthenticationPrincipal Principal principal
+    ) {
 
         Event event = eventService.findByName(eventName);
-        eventService.managersApproval(approvalForm,event,name);
+        eventService.managersApproval(approvalForm, event, name);
         //eventService.assignForEvent(event, principal.getName());
 
         return "redirect:/esa/event";
