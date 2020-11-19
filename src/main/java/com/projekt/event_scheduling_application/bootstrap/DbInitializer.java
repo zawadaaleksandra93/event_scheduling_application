@@ -95,6 +95,7 @@ public class DbInitializer {
                 testUser2, List.of());
 
         teamRepository.save(team1);
+        teamRepository.save(team2);
 
         userRepository.save(testUser);
         userRepository.save(testUser2);
