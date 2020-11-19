@@ -1,6 +1,7 @@
 package com.projekt.event_scheduling_application.services;
 
 import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.exceptions.ESAException;
 import lombok.RequiredArgsConstructor;
 import com.projekt.event_scheduling_application.model.UserForm;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,14 @@ public class UserService {
 
     public User findByEmail(final String email) {
         return userRepository.findById(email)
-                .orElseThrow(() -> new RuntimeException(String.format("User with email: %s does not exist", email)));
+                .orElseThrow(() -> new ESAException(String
+                                .format("User with email: %s does not exist", email)));
     }
 
     public User findByNick(final String nick) {
         return userRepository.findByNick(nick)
-                .orElseThrow(() -> new RuntimeException(String.format("User with nick: %s does not exist", nick)));
+                .orElseThrow(() -> new ESAException(String
+                        .format("User with nick: %s does not exist", nick)));
     }
 
 

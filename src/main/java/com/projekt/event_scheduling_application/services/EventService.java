@@ -1,16 +1,12 @@
 package com.projekt.event_scheduling_application.services;
 
 import com.projekt.event_scheduling_application.dao.Event;
-import com.projekt.event_scheduling_application.dao.Team;
-import com.projekt.event_scheduling_application.dao.TeamRole;
 import com.projekt.event_scheduling_application.dao.User;
-import com.projekt.event_scheduling_application.exceptions.UserAlreadyAddedException;
+import com.projekt.event_scheduling_application.exceptions.ESAException;
 import com.projekt.event_scheduling_application.mailConfirmation.ApprovalRequestMail;
-import com.projekt.event_scheduling_application.mailConfirmation.EmailConst;
 import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
 import com.projekt.event_scheduling_application.repositories.UserRepository;
-import com.projekt.event_scheduling_application.services.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -20,8 +16,6 @@ import com.projekt.event_scheduling_application.services.mapper.EventMapper;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -44,7 +38,8 @@ public class EventService {
 
     public Event findByName(final String name) {
         return eventRepository.findById(name)
-                .orElseThrow();
+                .orElseThrow(()->new ESAException(String
+                        .format("There is no event: %s",name)));
     }
 
     public Event findByDate(final LocalDate eventDate) {
@@ -53,11 +48,12 @@ public class EventService {
 
     public void assignForEvent(Event event, String userToBeAssigned) {
 
-        User userToAssign = userRepository.findById(userToBeAssigned).orElseThrow();
+        User userToAssign = userRepository.findById(userToBeAssigned).orElseThrow(() ->
+                new ESAException(String.format("there is no user: %s", userToBeAssigned)));
 
         List<User> participantsList = event.getListOfParticipants();
         if (participantsList.contains(userToAssign)) {
-            throw new UserAlreadyAddedException();
+            throw new ESAException("User is already assigned");
         }
         participantsList.add(userToAssign);
         userToAssign.getListOfSignedOnEvents().add(event);
@@ -65,11 +61,14 @@ public class EventService {
     }
 
     public User findTeamManager(String userToBeAssigned) {
-        final User user = userRepository.findById(userToBeAssigned).orElseThrow();
+        final User user = userRepository.findById(userToBeAssigned).orElseThrow(() ->
+                new ESAException(String.format("there is no user: %s", userToBeAssigned)));
         User teamManager = user.getTeam().stream()
                 .filter(team -> !team.getTeamLeader().equals(user))
                 .map(team -> team.getTeamLeader())
-                .findFirst().orElseThrow();
+                .findFirst().orElseThrow(() ->
+                        new ESAException(String.format("there is no team manager for team: %s"
+                                , user.getTeam())));
         return teamManager;
     }
 
@@ -96,19 +95,19 @@ public class EventService {
         approvalRequestMail.sendEmail(userToBeAssigned, messageSubject, messageContent);
     }
 
-    public void managersApproval(ApprovalForm approvalForm, Event event, String userToBeAssigned){
+    public void managersApproval(ApprovalForm approvalForm, Event event, String userToBeAssigned) {
         final User teamManager = findTeamManager(userToBeAssigned);
         String teamManagerName = teamManager.getEmail();
         String messageSubject = String.format("ESA: managers approval required for an event: %s"
                 , event.getName());
-        if (approvalForm.equals(true)){
-            assignForEvent(event,userToBeAssigned);
+        if (approvalForm.equals(true)) {
+            assignForEvent(event, userToBeAssigned);
 
             String messageContent = String
                     .format("Request of participation in an event: %s has been approved by %s"
                             , event.getName(), teamManager);
             approvalRequestMail.sendEmail(userToBeAssigned, messageSubject, messageContent);
-        }else {
+        } else {
             String messageContent = String
                     .format("Request of participation in an event: %s has been denied by %s"
                             , event.getName(), teamManager);
