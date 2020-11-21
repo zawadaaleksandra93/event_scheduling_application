@@ -42,7 +42,7 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @NotNull
+
     @Enumerated(EnumType.STRING)
     @Column(name = "team_role")
     private TeamRole teamRole;
