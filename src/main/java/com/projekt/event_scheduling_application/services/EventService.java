@@ -17,6 +17,7 @@ import com.projekt.event_scheduling_application.repositories.EventRepository;
 import com.projekt.event_scheduling_application.services.mapper.EventMapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -100,23 +101,26 @@ public class EventService {
         ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
     }
 
-    public void managersApproval(ApprovalForm approvalForm, Event event, String userToBeAssigned) {
+    public void managersApproval(ApprovalForm approvalForm, Event event,
+                                 String userToBeAssigned, Code code) {
         final User teamManager = findTeamManager(userToBeAssigned);
         String teamManagerName = teamManager.getEmail();
         String messageSubject = String.format("ESA: managers approval required for an event: %s"
                 , event.getName());
-        if (approvalForm.isApprove()) {
-            assignForEvent(event, userToBeAssigned);
+        if (code.getValidTill().isAfter(LocalDateTime.now())) {
+            if (approvalForm.isApprove()) {
+                assignForEvent(event, userToBeAssigned);
 
-            String messageContent = String
-                    .format("Request of participation in an event: %s has been approved by %s"
-                            , event.getName(), teamManager);
-            ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
-        } else {
-            String messageContent = String
-                    .format("Request of participation in an event: %s has been denied by %s"
-                            , event.getName(), teamManager.getEmail());
-            ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
-        }
+                String messageContent = String
+                        .format("Request of participation in an event: %s has been approved by %s"
+                                , event.getName(), teamManager);
+                ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+            } else {
+                String messageContent = String
+                        .format("Request of participation in an event: %s has been denied by %s"
+                                , event.getName(), teamManager.getEmail());
+                ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+            }
+        }else new ESAException("provided path is no longer valid");
     }
 }
