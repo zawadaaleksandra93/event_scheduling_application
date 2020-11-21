@@ -1,6 +1,6 @@
 package com.projekt.event_scheduling_application.services;
 
-import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.domain.User;
 import com.projekt.event_scheduling_application.exceptions.ESAException;
 import lombok.RequiredArgsConstructor;
 import com.projekt.event_scheduling_application.model.UserForm;

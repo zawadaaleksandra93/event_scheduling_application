@@ -1,4 +1,4 @@
-package com.projekt.event_scheduling_application.dao;
+package com.projekt.event_scheduling_application.domain;
 
 import lombok.*;
 
