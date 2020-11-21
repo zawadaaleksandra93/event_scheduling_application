@@ -1,11 +1,9 @@
 package com.projekt.event_scheduling_application.domain;
-
 import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -42,7 +40,7 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @NotNull
+
     @Enumerated(EnumType.STRING)
     @Column(name = "team_role")
     private TeamRole teamRole;
