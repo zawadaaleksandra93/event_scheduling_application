@@ -1,6 +1,6 @@
 package com.projekt.event_scheduling_application.repositories;
 
-import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

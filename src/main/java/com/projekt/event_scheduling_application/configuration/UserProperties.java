@@ -1,8 +1,8 @@
 package com.projekt.event_scheduling_application.configuration;
 
 
-import com.projekt.event_scheduling_application.dao.Event;
-import com.projekt.event_scheduling_application.dao.Role;
+import com.projekt.event_scheduling_application.domain.Event;
+import com.projekt.event_scheduling_application.domain.Role;
 import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;

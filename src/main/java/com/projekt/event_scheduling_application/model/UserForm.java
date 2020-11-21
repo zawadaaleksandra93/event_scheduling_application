@@ -1,13 +1,12 @@
 package com.projekt.event_scheduling_application.model;
 
-import com.projekt.event_scheduling_application.dao.Team;
-import com.projekt.event_scheduling_application.dao.TeamRole;
+import com.projekt.event_scheduling_application.domain.Team;
+import com.projekt.event_scheduling_application.domain.TeamRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;

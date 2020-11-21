@@ -1,7 +1,5 @@
 package com.projekt.event_scheduling_application.mailConfirmation;
 
-import com.projekt.event_scheduling_application.dao.Event;
-import com.projekt.event_scheduling_application.dao.User;
 import lombok.Getter;
 
 @Getter

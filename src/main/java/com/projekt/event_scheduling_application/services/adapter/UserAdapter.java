@@ -1,7 +1,7 @@
 package com.projekt.event_scheduling_application.services.adapter;
 
-import com.projekt.event_scheduling_application.dao.Role;
-import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.domain.Role;
+import com.projekt.event_scheduling_application.domain.User;
 import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

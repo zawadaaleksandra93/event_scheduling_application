@@ -1,14 +1,12 @@
 package com.projekt.event_scheduling_application.repositories;
 
 
-import com.projekt.event_scheduling_application.dao.Role;
-import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.domain.Role;
+import com.projekt.event_scheduling_application.domain.User;
 import com.projekt.event_scheduling_application.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.annotation.Rollback;
 
 import java.util.Optional;
 

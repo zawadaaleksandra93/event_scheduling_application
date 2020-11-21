@@ -1,9 +1,8 @@
-package com.projekt.event_scheduling_application.dao;
+package com.projekt.event_scheduling_application.domain;
 
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 

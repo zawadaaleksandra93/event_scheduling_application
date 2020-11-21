@@ -1,11 +1,13 @@
 package com.projekt.event_scheduling_application.services;
 
-import com.projekt.event_scheduling_application.dao.Event;
-import com.projekt.event_scheduling_application.dao.User;
+import com.projekt.event_scheduling_application.domain.Code;
+import com.projekt.event_scheduling_application.domain.Event;
+import com.projekt.event_scheduling_application.domain.User;
 import com.projekt.event_scheduling_application.exceptions.ESAException;
-import com.projekt.event_scheduling_application.mailConfirmation.MailSender;
+import com.projekt.event_scheduling_application.mailConfirmation.ESAMailSender;
 import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
+import com.projekt.event_scheduling_application.repositories.CodeRepository;
 import com.projekt.event_scheduling_application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +26,8 @@ public class EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
-    private final MailSender mailSender;
+    private final ESAMailSender ESAMailSender;
+    private final CodeRepository codeRepository;
 
 
     public List<Event> getAllEvents() {
@@ -73,14 +76,16 @@ public class EventService {
     }
 
     public void sendRequestToAssignToManager(String eventName, String userToBeAssigned) {
+        final Code code = new Code(userToBeAssigned, eventName);
+        final Code savedCode = codeRepository.save(code);
         final User teamManager = findTeamManager(userToBeAssigned);
         String approvalSubject = "ESA: Manager approval required";
         String approvalMessage = String
                 .format("please accept participation of %s in an event: %s. /n" +
-                                "Please go to path: http://localhost:8080/esa/event/assign/%s/%s/approval " +
+                                "Please click the link: http://localhost:8080/esa/event/assign/approval:code=%s " +
                                 "to accept request"
-                        , userToBeAssigned, eventName, userToBeAssigned, eventName);
-        mailSender.sendEmail(teamManager.getEmail()
+                        , userToBeAssigned, eventName, savedCode.getId());
+        ESAMailSender.sendEmail(teamManager.getEmail()
                 , approvalSubject, approvalMessage);
     }
 
@@ -92,7 +97,7 @@ public class EventService {
         String messageContent = String
                 .format("Request of participation in an event: %s has been send to %s"
                         , eventName, teamManagerName);
-        mailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+        ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
     }
 
     public void managersApproval(ApprovalForm approvalForm, Event event, String userToBeAssigned) {
@@ -106,12 +111,12 @@ public class EventService {
             String messageContent = String
                     .format("Request of participation in an event: %s has been approved by %s"
                             , event.getName(), teamManager);
-            mailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+            ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
         } else {
             String messageContent = String
                     .format("Request of participation in an event: %s has been denied by %s"
                             , event.getName(), teamManager);
-            mailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+            ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
         }
     }
 }

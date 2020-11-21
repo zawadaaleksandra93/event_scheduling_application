@@ -1,15 +1,10 @@
 package com.projekt.event_scheduling_application.bootstrap;
 
-import com.projekt.event_scheduling_application.dao.Event;
-import com.projekt.event_scheduling_application.dao.Role;
-import com.projekt.event_scheduling_application.dao.User;
-import com.projekt.event_scheduling_application.model.UserStatus;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+
 @Getter
 public class Data {
     String USER_NAME1 = "zalex93@gmail.com";
