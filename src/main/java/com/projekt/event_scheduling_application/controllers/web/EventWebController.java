@@ -94,7 +94,6 @@ public class EventWebController {
                                  @PathVariable final String eventName,
                                  @Valid @ModelAttribute(name = "approval")
                                  final ApprovalForm approvalForm) {
-
         Event event = eventService.findByName(eventName);
         eventService.managersApproval(approvalForm, event, name);
         return "redirect:/esa/event";
