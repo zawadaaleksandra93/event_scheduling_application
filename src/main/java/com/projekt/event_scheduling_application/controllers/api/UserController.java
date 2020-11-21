@@ -1,6 +1,6 @@
 package com.projekt.event_scheduling_application.controllers.api;
 
-import com.projekt.event_scheduling_application.domain.User;
+import com.projekt.event_scheduling_application.dao.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.projekt.event_scheduling_application.services.UserService;

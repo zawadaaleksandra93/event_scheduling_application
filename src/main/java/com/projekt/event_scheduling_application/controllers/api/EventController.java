@@ -1,6 +1,6 @@
 package com.projekt.event_scheduling_application.controllers.api;
 
-import com.projekt.event_scheduling_application.domain.Event;
+import com.projekt.event_scheduling_application.dao.Event;
 import com.projekt.event_scheduling_application.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

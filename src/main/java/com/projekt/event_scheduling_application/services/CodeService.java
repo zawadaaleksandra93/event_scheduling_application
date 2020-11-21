@@ -1,6 +1,6 @@
 package com.projekt.event_scheduling_application.services;
 
-import com.projekt.event_scheduling_application.domain.Code;
+import com.projekt.event_scheduling_application.dao.Code;
 import com.projekt.event_scheduling_application.exceptions.ESAException;
 import com.projekt.event_scheduling_application.repositories.CodeRepository;
 import lombok.RequiredArgsConstructor;

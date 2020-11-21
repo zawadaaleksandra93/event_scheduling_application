@@ -3,7 +3,7 @@ package com.projekt.event_scheduling_application.bootstrap;
 
 import com.projekt.event_scheduling_application.configuration.EventProperties;
 import com.projekt.event_scheduling_application.configuration.UserProperties;
-import com.projekt.event_scheduling_application.domain.*;
+import com.projekt.event_scheduling_application.dao.*;
 import com.projekt.event_scheduling_application.model.UserStatus;
 import com.projekt.event_scheduling_application.repositories.EventRepository;
 import com.projekt.event_scheduling_application.repositories.TeamRepository;

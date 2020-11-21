@@ -1,9 +1,8 @@
 package com.projekt.event_scheduling_application.controllers.web;
 
 import com.projekt.event_scheduling_application.controllers.api.EventController;
-import com.projekt.event_scheduling_application.domain.Code;
-import com.projekt.event_scheduling_application.domain.Event;
-import com.projekt.event_scheduling_application.domain.User;
+import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
 import com.projekt.event_scheduling_application.services.CodeService;

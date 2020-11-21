@@ -1,7 +1,6 @@
 package com.projekt.event_scheduling_application.services;
 
-import com.projekt.event_scheduling_application.domain.Code;
-import com.projekt.event_scheduling_application.domain.User;
+import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.exceptions.ESAException;
 import lombok.RequiredArgsConstructor;
 import com.projekt.event_scheduling_application.model.UserForm;
@@ -11,7 +10,6 @@ import com.projekt.event_scheduling_application.repositories.UserRepository;
 import com.projekt.event_scheduling_application.services.mapper.UserMapper;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Transactional

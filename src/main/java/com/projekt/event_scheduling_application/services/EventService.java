@@ -1,8 +1,8 @@
 package com.projekt.event_scheduling_application.services;
 
-import com.projekt.event_scheduling_application.domain.Code;
-import com.projekt.event_scheduling_application.domain.Event;
-import com.projekt.event_scheduling_application.domain.User;
+import com.projekt.event_scheduling_application.dao.Code;
+import com.projekt.event_scheduling_application.dao.Event;
+import com.projekt.event_scheduling_application.dao.User;
 import com.projekt.event_scheduling_application.exceptions.ESAException;
 import com.projekt.event_scheduling_application.mailConfirmation.ESAMailSender;
 import com.projekt.event_scheduling_application.model.ApprovalForm;

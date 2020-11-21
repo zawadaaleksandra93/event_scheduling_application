@@ -1,4 +1,4 @@
-package com.projekt.event_scheduling_application.domain;
+package com.projekt.event_scheduling_application.dao;
 
 import com.projekt.event_scheduling_application.model.UserStatus;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.projekt.event_scheduling_application.services.mapper;
 
-import com.projekt.event_scheduling_application.domain.Event;
+import com.projekt.event_scheduling_application.dao.Event;
 import com.projekt.event_scheduling_application.model.EventForm;
 import com.projekt.event_scheduling_application.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
