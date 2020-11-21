@@ -50,7 +50,6 @@ public class EventWebController {
         if (errors.hasErrors()) {
             return "event";
         }
-
         eventService.createEvent(eventForm, principal.getName());
         return "redirect:/esa/event";
     }
@@ -62,7 +61,6 @@ public class EventWebController {
         model.addAttribute("allEvents", allEvents);
 
         return "all_events";
-
     }
 
     @GetMapping("/assign/{name}")
@@ -103,7 +101,6 @@ public class EventWebController {
     public String getEventDetailsByName(@PathVariable String name, Model model) {
         Event eventWithGivenName = eventService.findByName(name);
         model.addAttribute("allEvents", eventWithGivenName);
-
         return "event_view";
     }
 
