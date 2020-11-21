@@ -1,18 +1,13 @@
 package com.projekt.event_scheduling_application.controllers.web;
 
 import com.projekt.event_scheduling_application.controllers.api.EventController;
-import com.projekt.event_scheduling_application.controllers.api.UserController;
 import com.projekt.event_scheduling_application.dao.Event;
-import com.projekt.event_scheduling_application.dao.Team;
 import com.projekt.event_scheduling_application.dao.User;
-import com.projekt.event_scheduling_application.mailConfirmation.ApprovalRequestMail;
 import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
-import com.projekt.event_scheduling_application.model.UserForm;
 import com.projekt.event_scheduling_application.services.EventService;
 import com.projekt.event_scheduling_application.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,12 +77,12 @@ public class EventWebController {
     public String getApprovalForm(ModelMap modelMap,
                                   @PathVariable final String name,
                                   @PathVariable final String eventName) {
-        List<User> users = userService.getAllUsers();
-        List<Event> events = eventService.getAllEvents();
-        events.stream().map(e->e.getName());
-        modelMap.addAttribute("approval", new ApprovalForm());
-        modelMap.addAttribute("users", users);
-        modelMap.addAttribute("events",events);
+
+        final User user = userService.findByEmail(name);
+        final Event event = eventService.findByName(eventName);
+        modelMap.addAttribute("approvalForm", new ApprovalForm());
+        modelMap.addAttribute("user", user);
+        modelMap.addAttribute("event",event);
         return "approval_form";
     }
 

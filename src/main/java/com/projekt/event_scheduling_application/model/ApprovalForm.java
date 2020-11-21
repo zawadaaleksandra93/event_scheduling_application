@@ -12,5 +12,5 @@ import javax.validation.constraints.NotNull;
 public class ApprovalForm {
 
     @NotNull
-     boolean approve;
+    private boolean approve;
 }
