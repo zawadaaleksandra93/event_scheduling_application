@@ -81,8 +81,8 @@ public class EventService {
         final User teamManager = findTeamManager(userToBeAssigned);
         String approvalSubject = "ESA: Manager approval required";
         String approvalMessage = String
-                .format("please accept participation of %s in an event: %s. /n" +
-                                "Please click the link: http://localhost:8080/esa/event/assign/approval:code=%s " +
+                .format("please accept participation of %s in an event: %s. //n" +
+                                "Please click the link: http://localhost:8080/esa/event/assign/approval?code=%s " +
                                 "to accept request"
                         , userToBeAssigned, eventName, savedCode.getId());
         ESAMailSender.sendEmail(teamManager.getEmail()
@@ -115,7 +115,7 @@ public class EventService {
         } else {
             String messageContent = String
                     .format("Request of participation in an event: %s has been denied by %s"
-                            , event.getName(), teamManager);
+                            , event.getName(), teamManager.getEmail());
             ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
         }
     }

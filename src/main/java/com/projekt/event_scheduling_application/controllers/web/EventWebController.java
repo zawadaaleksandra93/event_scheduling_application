@@ -89,18 +89,16 @@ public class EventWebController {
         return "approval_form";
     }
 
-    @PostMapping("/assign/approval/t-f:code={code}")
-    public String assignForEvent(
-            @Valid @ModelAttribute(name = "approval") final ApprovalForm approvalForm,
-            @PathVariable(name = "code") UUID pathCode) {
-        final String eventName = codeService.findEventName(pathCode);
-        final String name = codeService.findUserName(pathCode);
+    @PostMapping("/assign/{name}/{eventName}/approval/t-f")
+    public String assignForEvent(@PathVariable final String name,
+                                 @PathVariable final String eventName,
+                                 @Valid @ModelAttribute(name = "approval")
+                                 final ApprovalForm approvalForm) {
+
         Event event = eventService.findByName(eventName);
         eventService.managersApproval(approvalForm, event, name);
-
         return "redirect:/esa/event";
     }
-
 
     @GetMapping("/{name}")
     public String getEventDetailsByName(@PathVariable String name, Model model) {
