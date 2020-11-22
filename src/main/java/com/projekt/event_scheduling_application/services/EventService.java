@@ -77,17 +77,18 @@ public class EventService {
     }
 
     public void sendRequestToAssignToManager(String eventName, String userToBeAssigned) {
-        final Code code = new Code(userToBeAssigned, eventName);
+        final Code code = new Code(userToBeAssigned, eventName,LocalDateTime.now().plusDays(1));
         final Code savedCode = codeRepository.save(code);
         final User teamManager = findTeamManager(userToBeAssigned);
         String approvalSubject = "ESA: Manager approval required";
         String approvalMessage = String
                 .format("please accept participation of %s in an event: %s. //n" +
+                        //http://localhost:8080 wrzucic jako properties konfiguracyjne sciaga u Matyldy
                                 "Please click the link: http://localhost:8080/esa/event/assign/approval?code=%s " +
                                 "to accept request"
                         , userToBeAssigned, eventName, savedCode.getId());
-        ESAMailSender.sendEmail(teamManager.getEmail()
-                , approvalSubject, approvalMessage);
+        ESAMailSender.sendEmail(teamManager.getEmail(),
+                approvalSubject, approvalMessage);
     }
 
     public void sendInformationThatRequestHadBeenSend(String eventName, String userToBeAssigned) {
@@ -121,6 +122,6 @@ public class EventService {
                                 , event.getName(), teamManager.getEmail());
                 ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
             }
-        }else new ESAException("provided path is no longer valid");
+        }else throw new ESAException("provided path is no longer valid");
     }
 }

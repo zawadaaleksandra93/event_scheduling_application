@@ -25,12 +25,13 @@ public class Code {
 
     private LocalDateTime validTill;
 
-    public Code(String userName, String eventName) {
+
+    public Code(String userName, String eventName, LocalDateTime validTill) {
         this.userName = userName;
         this.eventName = eventName;
+        this.validTill = validTill;
     }
-
-  /*  @AssertTrue
+    /*  @AssertTrue
     public boolean isLinkStillValid(){
         return validTill.isAfter(LocalDateTime.now());
     }

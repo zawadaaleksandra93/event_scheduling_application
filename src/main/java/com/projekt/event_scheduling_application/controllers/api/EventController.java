@@ -28,6 +28,4 @@ public class EventController {
         return eventService.findByName(name);
     }
 
-
-
 }
