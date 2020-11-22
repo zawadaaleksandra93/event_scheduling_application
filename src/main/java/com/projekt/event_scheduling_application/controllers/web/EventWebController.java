@@ -38,12 +38,13 @@ public class EventWebController {
 
     }
 
+    //dostepne tylko dla admina, nie dla regular
     @GetMapping("/event_form")
     public String getEventForm(ModelMap modelMap) {
         modelMap.addAttribute("eventForm", new EventForm());
         return "event";
     }
-
+    //dostepne tylko dla admina, nie dla regular
     @PostMapping("/create")
     public String createNewEvent(@Valid @ModelAttribute(name = "eventForm") final EventForm eventForm,
                                  final Errors errors, @AuthenticationPrincipal Principal principal) {
@@ -76,7 +77,8 @@ public class EventWebController {
     }
 
     @GetMapping("/assign/approval")
-    public String getApprovalForm(ModelMap modelMap, @RequestParam(name = "code") UUID pathCode) {
+    public String getApprovalForm(ModelMap modelMap,
+                                  @RequestParam(name = "code") UUID pathCode) {
         final String eventName = codeService.findEventName(pathCode);
         final String name = codeService.findUserName(pathCode);
         final User user = userService.findByEmail(name);
@@ -84,16 +86,18 @@ public class EventWebController {
         modelMap.addAttribute("approvalForm", new ApprovalForm());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("event", event);
+        modelMap.addAttribute("code", pathCode);
         return "approval_form";
     }
 
     @PostMapping("/assign/{name}/{eventName}/approval/t-f")
     public String assignForEvent(@PathVariable final String name,
                                  @PathVariable final String eventName,
-                                 @Valid @ModelAttribute(name = "approval")
-                                 final ApprovalForm approvalForm) {
+                                 @Valid @ModelAttribute(name = "approval") final ApprovalForm approvalForm,
+                                 @RequestParam(name = "code") UUID pathCode) {
+        final Code code = codeService.findCode(pathCode);
         Event event = eventService.findByName(eventName);
-        eventService.managersApproval(approvalForm, event, name);
+        eventService.managersApproval(approvalForm, event, name, code);
         return "redirect:/esa/event";
     }
 

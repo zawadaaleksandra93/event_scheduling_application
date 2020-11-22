@@ -11,7 +11,7 @@
 
 
 <form method="post" th:object="${approvalForm}"
-      th:action="@{/esa/event/assign/{name}/{eventName}/approval/t-f (name=${user.email},eventName =${event.name})}">
+      th:action="@{/esa/event/assign/{name}/{eventName}/approval/t-f?code={code} (name=${user.email},eventName =${event.name}, code=${code})}">
     <label>Approve:</label>
     <input type="checkbox" th:field="*{approve}"/>
     <input type="submit" value="Submit">

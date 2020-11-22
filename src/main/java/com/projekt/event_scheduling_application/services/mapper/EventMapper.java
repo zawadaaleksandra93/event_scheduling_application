@@ -18,7 +18,7 @@ private final UserRepository userRepository;
 
     public Event fromEventFormToEvent(final EventForm eventForm, final String userLogin){
 
-        final Event event = Event.builder()
+        return Event.builder()
                 .name(eventForm.getName())
                 .date(LocalDate.parse(eventForm.getDate(), DateTimeFormatter.ISO_DATE))
                 .startTime(eventForm.getStartTime())
@@ -26,6 +26,5 @@ private final UserRepository userRepository;
                 .description(eventForm.getDescription())
                 .eventAdmin(userRepository.findById(userLogin).orElseThrow())
                 .build();
-        return event;
     }
 }

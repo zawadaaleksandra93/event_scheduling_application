@@ -17,6 +17,7 @@ import com.projekt.event_scheduling_application.repositories.EventRepository;
 import com.projekt.event_scheduling_application.services.mapper.EventMapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -76,17 +77,18 @@ public class EventService {
     }
 
     public void sendRequestToAssignToManager(String eventName, String userToBeAssigned) {
-        final Code code = new Code(userToBeAssigned, eventName);
+        final Code code = new Code(userToBeAssigned, eventName,LocalDateTime.now().plusDays(1));
         final Code savedCode = codeRepository.save(code);
         final User teamManager = findTeamManager(userToBeAssigned);
         String approvalSubject = "ESA: Manager approval required";
         String approvalMessage = String
                 .format("please accept participation of %s in an event: %s. //n" +
+                        //http://localhost:8080 wrzucic jako properties konfiguracyjne sciaga u Matyldy
                                 "Please click the link: http://localhost:8080/esa/event/assign/approval?code=%s " +
                                 "to accept request"
                         , userToBeAssigned, eventName, savedCode.getId());
-        ESAMailSender.sendEmail(teamManager.getEmail()
-                , approvalSubject, approvalMessage);
+        ESAMailSender.sendEmail(teamManager.getEmail(),
+                approvalSubject, approvalMessage);
     }
 
     public void sendInformationThatRequestHadBeenSend(String eventName, String userToBeAssigned) {
@@ -100,23 +102,26 @@ public class EventService {
         ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
     }
 
-    public void managersApproval(ApprovalForm approvalForm, Event event, String userToBeAssigned) {
+    public void managersApproval(ApprovalForm approvalForm, Event event,
+                                 String userToBeAssigned, Code code) {
         final User teamManager = findTeamManager(userToBeAssigned);
         String teamManagerName = teamManager.getEmail();
         String messageSubject = String.format("ESA: managers approval required for an event: %s"
                 , event.getName());
-        if (approvalForm.isApprove()) {
-            assignForEvent(event, userToBeAssigned);
+        if (code.getValidTill().isAfter(LocalDateTime.now())) {
+            if (approvalForm.isApprove()) {
+                assignForEvent(event, userToBeAssigned);
 
-            String messageContent = String
-                    .format("Request of participation in an event: %s has been approved by %s"
-                            , event.getName(), teamManager);
-            ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
-        } else {
-            String messageContent = String
-                    .format("Request of participation in an event: %s has been denied by %s"
-                            , event.getName(), teamManager.getEmail());
-            ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
-        }
+                String messageContent = String
+                        .format("Request of participation in an event: %s has been approved by %s"
+                                , event.getName(), teamManager);
+                ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+            } else {
+                String messageContent = String
+                        .format("Request of participation in an event: %s has been denied by %s"
+                                , event.getName(), teamManager.getEmail());
+                ESAMailSender.sendEmail(userToBeAssigned, messageSubject, messageContent);
+            }
+        }else throw new ESAException("provided path is no longer valid");
     }
 }

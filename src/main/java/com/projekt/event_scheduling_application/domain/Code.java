@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.AssertTrue;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -24,8 +25,16 @@ public class Code {
 
     private LocalDateTime validTill;
 
-    public Code(String userName, String eventName) {
+
+    public Code(String userName, String eventName, LocalDateTime validTill) {
         this.userName = userName;
         this.eventName = eventName;
+        this.validTill = validTill;
     }
+    /*  @AssertTrue
+    public boolean isLinkStillValid(){
+        return validTill.isAfter(LocalDateTime.now());
+    }
+   */
+
 }
