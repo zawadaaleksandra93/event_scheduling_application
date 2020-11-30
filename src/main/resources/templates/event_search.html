@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Event</title>
+    <th:block th:replace="fragments ::styles"/>
+</head>
+<body>
+<div th:replace="fragments :: navigator"/>
+<h1>Search Event</h1>
+<a>Please insert event name or event date</a>
+<form th:action="@{/esa/event/search}" method="post" th:object="${eventSearchForm}">
+    <label for="name">Name: </label>
+    <input id="name" type="text" th:field="*{name}">
+
+    <label for="date">Date: </label>
+    <input id="date" type="date" th:field="*{date}">
+
+    <button type="submit">SEARCH</button>
+</form>
+</div>
+
+</body>
+</html>

@@ -17,7 +17,6 @@ public class EventController {
 
     private final EventService eventService;
 
-
     @GetMapping
     public List<Event> showAllEvents() {
         return eventService.getAllEvents();
@@ -27,5 +26,4 @@ public class EventController {
     public Event getEventWithName(@PathVariable(name = "name") String name) {
         return eventService.findByName(name);
     }
-
 }

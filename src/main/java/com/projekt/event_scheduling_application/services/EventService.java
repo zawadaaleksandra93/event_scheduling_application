@@ -7,8 +7,10 @@ import com.projekt.event_scheduling_application.exceptions.ESAException;
 import com.projekt.event_scheduling_application.mailConfirmation.ESAMailSender;
 import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
+import com.projekt.event_scheduling_application.model.EventSearchForm;
 import com.projekt.event_scheduling_application.repositories.CodeRepository;
 import com.projekt.event_scheduling_application.repositories.UserRepository;
+import com.projekt.event_scheduling_application.services.mapper.SearchEventMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ import java.util.List;
 public class EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
+    private final SearchEventMapper searchEventMapper;
     private final UserRepository userRepository;
     private final ESAMailSender ESAMailSender;
     private final CodeRepository codeRepository;
@@ -40,6 +43,18 @@ public class EventService {
         eventRepository.save(event);
     }
 
+    public Event findEventByDetailsFromUser(final EventSearchForm eventSearchForm) {
+        Event searchEvent = searchEventMapper.fromEventSearchFormToEvent(eventSearchForm);
+        Event expectedEvent;
+
+        if (searchEvent.getName() == null && searchEvent.getDate() == null) {
+            throw new ESAException("there is no data to search. Please provide event name or event Date");
+        } else if (searchEvent.getName() != null) {
+            return findByName(searchEvent.getName());
+        } else
+            return findByDate(searchEvent.getDate());
+    }
+
     public Event findByName(final String name) {
         return eventRepository.findById(name)
                 .orElseThrow(()->new ESAException(String
@@ -47,7 +62,11 @@ public class EventService {
     }
 
     public Event findByDate(final LocalDate eventDate) {
-        return null;
+        return eventRepository.findAll()
+                .stream()
+                .filter(event -> event.getDate().equals(eventDate))
+                .findAny().orElseThrow(()-> new ESAException(
+                "There is no event scheduled for: "+eventDate));
     }
 
     public void assignForEvent(Event event, String userToBeAssigned) {

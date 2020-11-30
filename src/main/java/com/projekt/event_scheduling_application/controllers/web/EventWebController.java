@@ -6,6 +6,7 @@ import com.projekt.event_scheduling_application.domain.Event;
 import com.projekt.event_scheduling_application.domain.User;
 import com.projekt.event_scheduling_application.model.ApprovalForm;
 import com.projekt.event_scheduling_application.model.EventForm;
+import com.projekt.event_scheduling_application.model.EventSearchForm;
 import com.projekt.event_scheduling_application.services.CodeService;
 import com.projekt.event_scheduling_application.services.EventService;
 import com.projekt.event_scheduling_application.services.UserService;
@@ -35,7 +36,6 @@ public class EventWebController {
     @GetMapping
     public String getWelcomeForm() {
         return "welcome";
-
     }
 
     //dostepne tylko dla admina, nie dla regular
@@ -56,12 +56,35 @@ public class EventWebController {
     }
 
     @GetMapping("/getAllEvents")
-
     public String getAllEvents(Model model) {
         List<Event> allEvents = eventController.showAllEvents();
         model.addAttribute("allEvents", allEvents);
-
         return "all_events";
+    }
+
+    @GetMapping("/{name}")
+    public String getEventDetailsByName(@PathVariable String name, Model model) {
+        Event eventWithGivenName = eventService.findByName(name);
+        model.addAttribute("allEvents", eventWithGivenName);
+        return "event_view";
+    }
+
+    @GetMapping("/event_search_form")
+    public String getEventSearchForm(ModelMap modelMap) {
+        modelMap.addAttribute("eventSearchForm", new EventSearchForm());
+        return "event_search";
+    }
+
+    @PostMapping("/search")
+    public String searchAnEvent(@Valid @ModelAttribute(name = "eventSearchForm")
+                                    final EventSearchForm eventSearchForm,
+                                 final Errors errors) {
+        if (errors.hasErrors()) {
+            return "event_search";
+        }
+        final Event eventByDetailsFromUser = eventService.findEventByDetailsFromUser(eventSearchForm);
+        String eventName = eventByDetailsFromUser.getName();
+        return "redirect:/esa/event/{name}";
     }
 
     @GetMapping("/assign/{name}")
@@ -100,13 +123,4 @@ public class EventWebController {
         eventService.managersApproval(approvalForm, event, name, code);
         return "redirect:/esa/event";
     }
-
-    @GetMapping("/{name}")
-    public String getEventDetailsByName(@PathVariable String name, Model model) {
-        Event eventWithGivenName = eventService.findByName(name);
-        model.addAttribute("allEvents", eventWithGivenName);
-        return "event_view";
-    }
-
-
 }
