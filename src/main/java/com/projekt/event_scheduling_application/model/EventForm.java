@@ -17,16 +17,16 @@ public class EventForm {
     @NotNull(message = "name has to be provided")
     private String name;
 
-    @NotNull
+    @NotNull (message = "date has to be provided")
     private String date;
 
-    @NotNull
+    @NotNull (message = "Start time has to be provided")
     private LocalTime startTime;
 
-    @NotNull
+    @NotNull (message = "End time has to be provided")
     private LocalTime endTime;
 
-    @NotNull
-    @Length(min = 2)
+    @NotNull (message = "Start time has to be provided")
+    @Length(min = 2, message = "description should has at least 2 signs")
     private String description;
 }

@@ -45,8 +45,6 @@ public class Event {
     @ToString.Exclude
     @ManyToMany (mappedBy = "listOfSignedOnEvents")
     private List<User> listOfParticipants;
-
-
 }
 
 
